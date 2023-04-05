@@ -5,8 +5,6 @@ CREATE TABLE account (
     currency            VARCHAR(255) NOT NULL,
     last_operation_time TIMESTAMP NOT NULL,
     customer_id         INTEGER NOT NULL,
-
-    FOREIGN KEY (customer_id) REFERENCES customer (id)
 );
 
 CREATE OR REPLACE FUNCTION get_accounts(cust_id INTEGER)
