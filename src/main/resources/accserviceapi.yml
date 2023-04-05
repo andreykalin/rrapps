@@ -1,0 +1,74 @@
+openapi: 3.0.0
+info:
+  title: Account Service API
+  description: API for managing customer accounts
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+paths:
+  /api/customers/{customerId}/accounts:
+    get:
+      summary: Get a list of accounts for a customer
+      parameters:
+        - name: customerId
+          in: path
+          required: true
+          schema:
+            type: integer
+          description: The ID of the customer whose accounts should be retrieved
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Account'
+        '500':
+          description: An error occurred on the server
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+components:
+  schemas:
+    Account:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: The unique identifier of the account
+        accountNumber:
+          type: string
+          description: The account number associated with the account
+        balance:
+          type: number
+          format: double
+          description: The current balance of the account
+        currency:
+          type: string
+          description: The currency associated with the account
+        lastOperationTime:
+          type: string
+          format: date-time
+          description: The time of the last operation performed on the account
+      required:
+        - id
+        - accountNumber
+        - balance
+        - currency
+        - lastOperationTime
+    Message:
+      type: object
+      properties:
+        message:
+          type: string
+          description: A message describing the error that occurred
+        type:
+          type: string
+          description: The type of error that occurred ("error", "warning")
+      required:
+        - message
+        - type
+
