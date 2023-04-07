@@ -4,7 +4,7 @@ CREATE TABLE account (
     balance             DECIMAL(10, 2) NOT NULL,
     currency            VARCHAR(255) NOT NULL,
     last_operation_time TIMESTAMP NOT NULL,
-    customer_id         INTEGER NOT NULL,
+    customer_id         INTEGER NOT NULL
 );
 
 CREATE OR REPLACE FUNCTION get_accounts(cust_id INTEGER)
